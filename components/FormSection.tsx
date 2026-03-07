@@ -6,6 +6,7 @@ import { formatPhone, toPhoneDigits } from "@/lib/formatPhone";
 import {
   formatBirthDate,
   toBirthDateDigits,
+  padToEightDigits,
   isValidBirthDate,
 } from "@/lib/formatBirthDate";
 import type { ApplicationForm } from "@/types/application";
@@ -48,14 +49,15 @@ export default function FormSection() {
       return;
     }
     const birthDigits = toBirthDateDigits(form.birthDate);
+    const birthNormalized = padToEightDigits(birthDigits);
     if (!birthDigits) {
       setMessage({ type: "error", text: "생년월일을 입력해주세요." });
       return;
     }
-    if (!isValidBirthDate(birthDigits)) {
+    if (!isValidBirthDate(birthNormalized)) {
       setMessage({
         type: "error",
-        text: "올바른 생년월일을 입력해주세요. (예: 1995년 01월 01일)",
+        text: "올바른 생년월일을 입력해주세요. (예: 1995년 11월 15일)",
       });
       return;
     }
@@ -79,7 +81,7 @@ export default function FormSection() {
 
       const { error } = await supabase.from("user_info_landing").insert({
         name: form.name.trim(),
-        birth_date: birthDigits,
+        birth_date: birthNormalized,
         phone: phoneDigits,
         gender: form.gender,
       });
@@ -150,7 +152,7 @@ export default function FormSection() {
               value={form.birthDate}
               onChange={handleBirthDateChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
-              placeholder="1995년 01월 01일"
+              placeholder="1995년 11월 15일"
               disabled={loading}
             />
           </div>

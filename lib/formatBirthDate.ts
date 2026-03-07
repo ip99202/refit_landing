@@ -17,16 +17,28 @@ export function formatBirthDate(value: string): string {
 }
 
 /**
+ * 7자리(YYYYMMD)를 8자리(YYYYMMDD)로 패딩. 일이 한자리일 때 0 채움
+ */
+export function padToEightDigits(digits: string): string {
+  if (digits.length === 7 && /^\d{7}$/.test(digits)) {
+    return digits.slice(0, 6) + "0" + digits.slice(6);
+  }
+  return digits;
+}
+
+/**
  * 생년월일 유효성 검사 (YYYYMMDD)
  * - 연도: 1900 ~ (현재년도 - 10)
  * - 월: 1~12
  * - 일: 해당 월의 유효한 일수
+ * - 7자리(YYYYMMD) 입력 시 일 앞에 0 패딩하여 처리
  */
 export function isValidBirthDate(digits: string): boolean {
-  if (digits.length !== 8 || !/^\d{8}$/.test(digits)) return false;
-  const y = parseInt(digits.slice(0, 4), 10);
-  const m = parseInt(digits.slice(4, 6), 10);
-  const d = parseInt(digits.slice(6, 8), 10);
+  const padded = padToEightDigits(digits);
+  if (padded.length !== 8 || !/^\d{8}$/.test(padded)) return false;
+  const y = parseInt(padded.slice(0, 4), 10);
+  const m = parseInt(padded.slice(4, 6), 10);
+  const d = parseInt(padded.slice(6, 8), 10);
   if (m < 1 || m > 12) return false;
   const maxYear = new Date().getFullYear() - 10;
   if (y < 1900 || y > maxYear) return false;
