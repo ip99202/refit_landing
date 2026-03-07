@@ -8,13 +8,13 @@ Next.js + TypeScript + Tailwind CSS + Supabase
 2. **SQL Editor** → New query
 3. 아래 마이그레이션 순서대로 실행 (각각 SQL Editor에 붙여넣기 후 Run):
    - `supabase/migrations/20250307000000_create_applications.sql`
-   - `supabase/migrations/20250307000001_add_anon_select_for_keepalive.sql` (Keep-Alive용 select policy)
+   - `supabase/migrations/20250307000002_unique_phone.sql` (휴대폰 중복 방지 UNIQUE 제약)
 
-   이미 1번만 실행한 경우: 2번 마이그레이션만 추가 실행하면 됨.
+   이미 `20250307000001_add_anon_select_for_keepalive.sql`을 실행한 경우: `20250307000003_drop_anon_select_policy.sql`을 추가 실행하여 위험한 SELECT 정책을 제거하세요.
 
 ## Supabase DB Keep-Alive (GitHub Actions)
 
-무료 플랜은 7일 미사용 시 프로젝트가 일시 중지된다. 매일 12:00(KST)에 `applications` 테이블을 조회하는 워크플로우로 이를 방지한다.
+무료 플랜은 7일 미사용 시 프로젝트가 일시 중지된다. 매일 12:00(KST)에 `applications` 테이블을 조회하는 워크플로우로 이를 방지한다. anon 키로 요청 시 RLS에 의해 빈 결과만 반환되며, 개인정보는 노출되지 않는다.
 
 **GitHub Secrets 설정** (Repository → Settings → Secrets and variables → Actions):
 

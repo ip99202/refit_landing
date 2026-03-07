@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase";
+import { formatPhone, toPhoneDigits } from "@/lib/formatPhone";
+import {
+  formatBirthDate,
+  toBirthDateDigits,
+  isValidBirthDate,
+} from "@/lib/formatBirthDate";
 import type { ApplicationForm } from "@/types/application";
 
 export default function FormSection() {
@@ -14,16 +20,19 @@ export default function FormSection() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  const formatPhone = (value: string) => {
-    const digits = value.replace(/\D/g, "").slice(0, 11);
-    if (digits.length <= 3) return digits;
-    if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
-    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
-  };
-
   const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = e.target.value.replace(/\D/g, "").slice(0, 8);
-    setForm((f) => ({ ...f, birthDate: v }));
+    const prev = form.birthDate;
+    const newVal = e.target.value;
+    const prevDigits = toBirthDateDigits(prev);
+    const newDigits = toBirthDateDigits(newVal);
+
+    // 백스페이스로 '년', '월', '일' 등 포맷 문자만 지운 경우 → 마지막 숫자 삭제로 처리
+    if (newVal.length < prev.length && newDigits === prevDigits) {
+      const trimmed = prevDigits.slice(0, -1);
+      setForm((f) => ({ ...f, birthDate: formatBirthDate(trimmed) }));
+    } else {
+      setForm((f) => ({ ...f, birthDate: formatBirthDate(newVal) }));
+    }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,15 +47,19 @@ export default function FormSection() {
       setMessage({ type: "error", text: "이름을 입력해주세요." });
       return;
     }
-    if (!form.birthDate.trim()) {
+    const birthDigits = toBirthDateDigits(form.birthDate);
+    if (!birthDigits) {
       setMessage({ type: "error", text: "생년월일을 입력해주세요." });
       return;
     }
-    if (!/^\d{8}$/.test(form.birthDate.replace(/-/g, ""))) {
-      setMessage({ type: "error", text: "생년월일은 8자리(YYYYMMDD)로 입력해주세요." });
+    if (!isValidBirthDate(birthDigits)) {
+      setMessage({
+        type: "error",
+        text: "올바른 생년월일을 입력해주세요. (예: 1995년 01월 01일)",
+      });
       return;
     }
-    const phoneDigits = form.phone.replace(/\D/g, "");
+    const phoneDigits = toPhoneDigits(form.phone);
     if (!phoneDigits) {
       setMessage({ type: "error", text: "휴대폰 번호를 입력해주세요." });
       return;
@@ -63,14 +76,22 @@ export default function FormSection() {
     setLoading(true);
     try {
       const supabase = createClient();
+
       const { error } = await supabase.from("applications").insert({
         name: form.name.trim(),
-        birth_date: form.birthDate.replace(/-/g, ""),
-        phone: form.phone.replace(/\D/g, ""),
+        birth_date: birthDigits,
+        phone: phoneDigits,
         gender: form.gender,
       });
 
-      if (error) throw error;
+      if (error) {
+        // 23505 = PostgreSQL unique_violation (중복 휴대폰 번호)
+        if (error.code === "23505") {
+          setMessage({ type: "error", text: "이미 신청하셨습니다." });
+          return;
+        }
+        throw error;
+      }
 
       setMessage({ type: "success", text: "신청이 완료되었습니다! 감사합니다." });
       setForm({ name: "", birthDate: "", phone: "", gender: "" });
@@ -129,8 +150,7 @@ export default function FormSection() {
               value={form.birthDate}
               onChange={handleBirthDateChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
-              placeholder="19950101"
-              maxLength={8}
+              placeholder="1995년 01월 01일"
               disabled={loading}
             />
           </div>

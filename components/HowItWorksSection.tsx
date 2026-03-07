@@ -3,19 +3,19 @@ const STEPS = [
     step: 1,
     title: "이전 연애 경험 작성",
     desc: "매칭 전, 이전 연애 경험을 설문으로 작성해주세요.",
-    placeholder: "설문 UI",
+    image: "/image/refit1.jpg",
   },
   {
     step: 2,
     title: "연애 패턴 진단",
     desc: "200명의 연애 데이터를 분석한 자체 알고리즘으로 연애 패턴을 진단합니다.",
-    placeholder: "분석/점수 UI",
+    image: "/image/refit2.jpg",
   },
   {
     step: 3,
     title: "매칭 성공",
     desc: "서로 간의 프로필 확인 후, 가장 잘 맞는 사람과 매칭 성공!",
-    placeholder: "매칭 UI",
+    image: "/image/refit3.jpg",
   },
 ];
 
@@ -28,7 +28,7 @@ export default function HowItWorksSection() {
         </h2>
 
         <div className="space-y-8">
-          {STEPS.map(({ step, title, desc, placeholder }) => (
+          {STEPS.map(({ step, title, desc, image }) => (
             <div key={step} className="flex gap-4">
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center">
                 {step}
@@ -36,9 +36,11 @@ export default function HowItWorksSection() {
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900 mb-2">{title}</h3>
                 <p className="text-sm text-gray-600 mb-4">{desc}</p>
-                <div className="h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-sm">
-                  {placeholder} 이미지
-                </div>
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-auto rounded-lg"
+                />
               </div>
             </div>
           ))}
