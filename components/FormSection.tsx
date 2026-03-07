@@ -77,7 +77,7 @@ export default function FormSection() {
     try {
       const supabase = createClient();
 
-      const { error } = await supabase.from("applications").insert({
+      const { error } = await supabase.from("user_info_landing").insert({
         name: form.name.trim(),
         birth_date: birthDigits,
         phone: phoneDigits,

@@ -18,7 +18,7 @@ jobs:
           SUPABASE_URL="${SUPABASE_URL%/}"
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
             --connect-timeout 10 \
-            -X GET "${SUPABASE_URL}/rest/v1/applications?select=id&limit=1" \
+            -X GET "${SUPABASE_URL}/rest/v1/user_info_landing?select=id&limit=1" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
             -H "Content-Type: application/json")

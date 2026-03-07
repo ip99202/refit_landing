@@ -1,7 +1,7 @@
 export type Database = {
   public: {
     Tables: {
-      applications: {
+      user_info_landing: {
         Row: {
           id: string;
           name: string;
@@ -18,7 +18,7 @@ export type Database = {
           gender: "남" | "여";
           created_at?: string;
         };
-        Update: Partial<Database["public"]["Tables"]["applications"]["Insert"]>;
+        Update: Partial<Database["public"]["Tables"]["user_info_landing"]["Insert"]>;
       };
     };
   };
