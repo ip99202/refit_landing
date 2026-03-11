@@ -54,10 +54,25 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Discord 신청 알림
+
+새 프로모션 신청 시 Discord 웹훅으로 알림을 받을 수 있다. (선택 사항)
+
+1. Discord 서버 → 채널 설정 → 연동 → 웹후크 → 새 웹후크 생성
+2. 웹후크 URL 복사
+3. `.env.local`에 추가:
+   ```
+   DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+   ```
+4. Vercel 등 배포 환경에도 동일 환경 변수 설정
+
+`DISCORD_WEBHOOK_URL`이 없으면 알림을 건너뛰며, 신청 자체는 정상 처리된다.
+
 ## Deploy on Vercel
 
 1. GitHub에 푸시 후 [Vercel](https://vercel.com/new)에서 프로젝트 import
 2. 환경 변수 설정:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `DISCORD_WEBHOOK_URL` (선택: Discord 알림용)
 3. 배포 후 Supabase Table Editor에서 `user_info_landing` 데이터 확인

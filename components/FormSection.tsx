@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase";
 import { formatPhone, toPhoneDigits } from "@/lib/formatPhone";
 import {
   formatBirthDate,
@@ -77,22 +76,25 @@ export default function FormSection() {
 
     setLoading(true);
     try {
-      const supabase = createClient();
-
-      const { error } = await supabase.from("user_info_landing").insert({
-        name: form.name.trim(),
-        birth_date: birthNormalized,
-        phone: phoneDigits,
-        gender: form.gender,
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          birthDate: form.birthDate,
+          phone: form.phone,
+          gender: form.gender,
+        }),
       });
 
-      if (error) {
-        // 23505 = PostgreSQL unique_violation (중복 휴대폰 번호)
-        if (error.code === "23505") {
-          setMessage({ type: "error", text: "이미 신청하셨습니다." });
-          return;
-        }
-        throw error;
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage({
+          type: "error",
+          text: data.error ?? "신청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+        });
+        return;
       }
 
       setMessage({ type: "success", text: "신청이 완료되었습니다! 감사합니다." });
