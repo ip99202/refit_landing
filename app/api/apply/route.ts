@@ -8,6 +8,10 @@ type ApplyBody = {
   birthDate: string;
   phone: string;
   gender: string;
+  q1: string;
+  q2: string;
+  q3: string;
+  etc?: string;
 };
 
 async function sendDiscordNotification(data: {
@@ -15,6 +19,10 @@ async function sendDiscordNotification(data: {
   birth_date: string;
   phone: string;
   gender: string;
+  q1: string;
+  q2: string;
+  q3: string;
+  etc?: string;
 }) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return;
@@ -26,6 +34,10 @@ async function sendDiscordNotification(data: {
       { name: "생년월일", value: data.birth_date, inline: true },
       { name: "휴대폰", value: data.phone, inline: true },
       { name: "성별", value: data.gender, inline: true },
+      { name: "Q1", value: data.q1, inline: false },
+      { name: "Q2", value: data.q2, inline: false },
+      { name: "Q3", value: data.q3, inline: false },
+      { name: "기타", value: data.etc || "-", inline: false },
     ],
     timestamp: new Date().toISOString(),
   };
@@ -72,6 +84,15 @@ export async function POST(request: Request) {
     if (!["남", "여"].includes(body.gender)) {
       return NextResponse.json({ error: "성별을 선택해주세요." }, { status: 400 });
     }
+    if (!body.q1?.trim()) {
+      return NextResponse.json({ error: "Q1 문항을 선택해주세요." }, { status: 400 });
+    }
+    if (!body.q2?.trim()) {
+      return NextResponse.json({ error: "Q2 문항을 1개 이상 선택해주세요." }, { status: 400 });
+    }
+    if (!body.q3?.trim()) {
+      return NextResponse.json({ error: "Q3 문항을 1개 이상 선택해주세요." }, { status: 400 });
+    }
 
     const supabase = createClient();
     const { error } = await supabase.from("user_info_landing").insert({
@@ -79,6 +100,10 @@ export async function POST(request: Request) {
       birth_date: birthNormalized,
       phone: phoneDigits,
       gender: body.gender as "남" | "여",
+      q1: body.q1,
+      q2: body.q2,
+      q3: body.q3,
+      etc: (body.etc ?? "").trim(),
     });
 
     if (error) {
@@ -96,6 +121,10 @@ export async function POST(request: Request) {
       birth_date: birthNormalized,
       phone: phoneDigits,
       gender: body.gender,
+      q1: body.q1,
+      q2: body.q2,
+      q3: body.q3,
+      etc: body.etc,
     });
 
     return NextResponse.json({ success: true });

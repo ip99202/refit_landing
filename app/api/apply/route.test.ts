@@ -16,6 +16,10 @@ const validBody = {
   birthDate: "1995년 11월 15일",
   phone: "010-1234-5678",
   gender: "남",
+  q1: "a1",
+  q2: "a3,a6",
+  q3: "a2",
+  etc: "가끔 의견 충돌",
 };
 
 async function callApi(body: object) {
@@ -92,6 +96,10 @@ describe("POST /api/apply", () => {
       birth_date: "19951115",
       phone: "01012345678",
       gender: "남",
+      q1: "a1",
+      q2: "a3,a6",
+      q3: "a2",
+      etc: "가끔 의견 충돌",
     });
   });
 
