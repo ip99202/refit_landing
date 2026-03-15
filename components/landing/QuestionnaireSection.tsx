@@ -184,9 +184,7 @@ export const QuestionnaireSection = ({
         <div className="space-y-3">
           <div>
             <p className="text-lg font-bold text-[#222222]">
-              Q3. 다음 연애에서 가장 중요하게 생각하는 것은
-              <br />
-              무엇인가요?
+              Q3. 다음 연애에서 가장 중요하게 생각하는 것은 무엇인가요?
             </p>
             <div className="text-sm font-light text-[#666666]">중복선택 가능</div>
           </div>
