@@ -108,7 +108,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <p className="mt-8 text-[clamp(26px,5.4vw,66px)] font-normal leading-[1.2] tracking-[-0.03em] sm:mt-10">
+            <p className="mt-8 text-[clamp(20px,6.4vw,66px)] font-normal leading-[1.16] tracking-[-0.03em] sm:mt-10">
               <span className="font-bold">사전신청</span>을 통해
               <br />
               <span className="font-bold">리핏 오픈</span>을 제일 먼저 받아보세요!🔥
