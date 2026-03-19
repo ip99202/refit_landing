@@ -78,10 +78,8 @@ export const UserInfoFormSection = ({
     const q1Codes = q1CodeOrder.filter((item) => checkedQ1[item.key]).map((item) => item.code);
     const q2Codes = q2CodeOrder.filter((item) => checkedQ2[item.key]).map((item) => item.code);
 
-    const etcParts = [];
-    if (checkedQ1["기타"] && otherTextQ1.trim()) etcParts.push(`Q1: ${otherTextQ1.trim()}`);
-    if (checkedQ2["기타"] && otherTextQ2.trim()) etcParts.push(`Q2: ${otherTextQ2.trim()}`);
-    const etc = etcParts.join(" / ");
+    const etc1 = checkedQ1["기타"] && otherTextQ1.trim() ? otherTextQ1.trim() : "";
+    const etc2 = checkedQ2["기타"] && otherTextQ2.trim() ? otherTextQ2.trim() : "";
 
     if (checkedQ1["기타"] && !otherTextQ1.trim()) {
       setMessage({ type: "error", text: "Q1의 기타 사유를 입력해주세요." });
@@ -135,8 +133,8 @@ export const UserInfoFormSection = ({
           gender: genderKo,
           q1: q1Codes.join(","),
           q2: q2Codes.join(","),
-          q3: "-",
-          etc,
+          etc1,
+          etc2,
         }),
       });
       const data = await res.json();

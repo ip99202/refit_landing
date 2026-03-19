@@ -10,8 +10,8 @@ export type Database = {
           gender: "남" | "여";
           q1: string;
           q2: string;
-          q3: string;
-          etc: string;
+          etc1: string;
+          etc2: string;
           created_at: string;
         };
         Insert: {
@@ -22,8 +22,8 @@ export type Database = {
           gender: "남" | "여";
           q1: string;
           q2: string;
-          q3: string;
-          etc?: string;
+          etc1?: string;
+          etc2?: string;
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["user_info_landing"]["Insert"]>;

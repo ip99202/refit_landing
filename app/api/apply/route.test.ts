@@ -18,8 +18,8 @@ const validBody = {
   gender: "남",
   q1: "a1",
   q2: "a3,a6",
-  q3: "a2",
-  etc: "가끔 의견 충돌",
+  etc1: "가끔 의견 충돌",
+  etc2: "가격 비쌈",
 };
 
 async function callApi(body: object) {
@@ -98,8 +98,8 @@ describe("POST /api/apply", () => {
       gender: "남",
       q1: "a1",
       q2: "a3,a6",
-      q3: "a2",
-      etc: "가끔 의견 충돌",
+      etc1: "가끔 의견 충돌",
+      etc2: "가격 비쌈",
     });
   });
 
