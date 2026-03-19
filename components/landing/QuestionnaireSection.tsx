@@ -3,52 +3,15 @@ import type { Dispatch, SetStateAction } from "react";
 type CheckedMap = Record<string, boolean>;
 
 type QuestionnaireSectionProps = {
-  selectedQ1: string;
-  setSelectedQ1: (value: string) => void;
+  checkedQ1: CheckedMap;
+  setCheckedQ1: Dispatch<SetStateAction<CheckedMap>>;
+  otherTextQ1: string;
+  setOtherTextQ1: (value: string) => void;
   checkedQ2: CheckedMap;
   setCheckedQ2: Dispatch<SetStateAction<CheckedMap>>;
   otherTextQ2: string;
   setOtherTextQ2: (value: string) => void;
-  checkedQ3: CheckedMap;
-  setCheckedQ3: Dispatch<SetStateAction<CheckedMap>>;
 };
-
-const RadioOption = ({
-  label,
-  selected,
-  onSelect,
-}: {
-  label: string;
-  selected: boolean;
-  onSelect: () => void;
-}) => (
-  <button
-    type="button"
-    className="inline-flex cursor-pointer items-center gap-3 border-none bg-transparent p-0"
-    onClick={onSelect}
-  >
-    <span className="flex w-6 flex-col items-center justify-center p-0.5">
-      <span
-        className={`relative h-5 w-5 overflow-hidden rounded-[10px] border-[1.75px] border-solid ${
-          selected ? "border-[#ff6f13]" : "border-[#d6dde7]"
-        }`}
-      >
-        {selected ? (
-          <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#ff6f13]" />
-        ) : null}
-      </span>
-    </span>
-    <div
-      className={`w-fit whitespace-nowrap text-base leading-[21.4px] text-[color:var(--colorlabelnormal)] ${
-        selected
-          ? "[font-family:'Freesentation-6SemiBold',Helvetica] font-semibold"
-          : "[font-family:'Freesentation-4Regular',Helvetica] font-normal"
-      }`}
-    >
-      {label}
-    </div>
-  </button>
-);
 
 const CheckboxOption = ({
   label,
@@ -100,17 +63,16 @@ const CheckboxOption = ({
 );
 
 export const QuestionnaireSection = ({
-  selectedQ1,
-  setSelectedQ1,
+  checkedQ1,
+  setCheckedQ1,
+  otherTextQ1,
+  setOtherTextQ1,
   checkedQ2,
   setCheckedQ2,
   otherTextQ2,
   setOtherTextQ2,
-  checkedQ3,
-  setCheckedQ3,
 }: QuestionnaireSectionProps) => {
-  const q1Options = ["3개월 이내", "6개월 이내", "1년 이내", "1년 이상", "연애 경험 없음"];
-  const q2Options = [
+  const q1Options = [
     "연락/소통 문제",
     "상대의 무관심",
     "잦은 다툼",
@@ -118,38 +80,72 @@ export const QuestionnaireSection = ({
     "성격차이",
     "기타",
   ];
-  const q3Options = ["잘 맞는 성격", "신뢰 / 안정감", "대화 / 소통", "외모 / 매력", "가치관"];
+  const q2Options = [
+    "매칭 상대의 외모/프로필 사진",
+    "나와 잘 맞는 사람을 찾는 매칭 알고리즘",
+    "상대의 진정성 (허위/가짜 계정 여부)",
+    "대화 기능 및 사용 편의성",
+    "가입자 수 등 앱의 규모와 활성도",
+    "안전성 및 개인정보 보호",
+    "유료/무료 기능 및 가격",
+    "기타",
+  ];
 
+  const toggleQ1 = (option: string) => {
+    setCheckedQ1((prev) => ({ ...prev, [option]: !prev[option] }));
+  };
   const toggleQ2 = (option: string) => {
     setCheckedQ2((prev) => ({ ...prev, [option]: !prev[option] }));
-  };
-  const toggleQ3 = (option: string) => {
-    setCheckedQ3((prev) => ({ ...prev, [option]: !prev[option] }));
   };
 
   return (
     <section className="-mx-4 bg-white px-4 py-8">
       <div className="space-y-8">
         <div className="space-y-3">
-          <p className="text-lg font-bold text-[#222222]">Q1. 마지막 연애는 언제 끝났나요?</p>
-          <div className="inline-flex flex-col items-start gap-2">
-            {q1Options.map((option) => (
-              <RadioOption
-                key={option}
-                label={option}
-                selected={selectedQ1 === option}
-                onSelect={() => setSelectedQ1(option)}
-              />
-            ))}
+          <div>
+            <p className="text-[17px] font-bold text-[#222222]">Q1. 지난 연애가 끝난 이유는 무엇이었나요?</p>
+            <div className="mt-1 text-sm font-light text-[#888888]">중복선택 가능</div>
+          </div>
+          <div className="flex flex-col items-start gap-2 pt-1">
+            {q1Options.map((option) =>
+              option === "기타" ? (
+                <div key={option} className="flex w-full flex-col items-start gap-2">
+                  <CheckboxOption
+                    label="기타"
+                    checked={!!checkedQ1[option]}
+                    onToggle={() => toggleQ1(option)}
+                  />
+                  <div className="w-full pl-8">
+                    <div className="flex flex-col rounded border border-solid border-[color:var(--colorlinenormal)] bg-[color:var(--colorbackgrounddefault)] p-[var(--element-spacing-6)]">
+                      <textarea
+                        className="h-[60px] w-full resize-none border-0 bg-transparent font-body2-regular text-[15px] leading-[1.4] text-[#222222] outline-none placeholder:text-[#a0a0a0]"
+                        placeholder="기타 사유를 입력해주세요"
+                        value={otherTextQ1}
+                        onChange={(e) => setOtherTextQ1(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <CheckboxOption
+                  key={option}
+                  label={option}
+                  checked={!!checkedQ1[option]}
+                  onToggle={() => toggleQ1(option)}
+                />
+              ),
+            )}
           </div>
         </div>
 
         <div className="space-y-3">
           <div>
-            <p className="text-lg font-bold text-[#222222]">Q2. 지난 연애가 끝난 이유는 무엇이었나요?</p>
-            <div className="text-sm font-light text-[#666666]">중복선택 가능</div>
+            <p className="text-[17px] font-bold text-[#222222] leading-[1.35]">
+              Q2. 소개팅어플에서 가장 중요하게 생각하는 부분이 무엇인가요?
+            </p>
+            <div className="mt-1 text-sm font-light text-[#888888]">중복선택 가능</div>
           </div>
-          <div className="flex flex-col items-start gap-2">
+          <div className="flex flex-col items-start gap-2 pt-1">
             {q2Options.map((option) =>
               option === "기타" ? (
                 <div key={option} className="flex w-full flex-col items-start gap-2">
@@ -159,9 +155,9 @@ export const QuestionnaireSection = ({
                     onToggle={() => toggleQ2(option)}
                   />
                   <div className="w-full pl-8">
-                    <div className="flex h-20 flex-col rounded border border-solid border-[color:var(--colorlinenormal)] bg-[color:var(--colorbackgrounddefault)] p-[var(--element-spacing-6)]">
+                    <div className="flex flex-col rounded border border-solid border-[color:var(--colorlinenormal)] bg-[color:var(--colorbackgrounddefault)] p-[var(--element-spacing-6)]">
                       <textarea
-                        className="h-full w-full resize-none border-0 bg-transparent font-body2-regular text-[length:var(--body2-regular-font-size)] leading-[var(--body2-regular-line-height)] text-[color:var(--colorlabelnormal)] outline-none placeholder:text-[color:var(--colorlabelalternative)]"
+                        className="h-[60px] w-full resize-none border-0 bg-transparent font-body2-regular text-[15px] leading-[1.4] text-[#222222] outline-none placeholder:text-[#a0a0a0]"
                         placeholder="기타 사유를 입력해주세요"
                         value={otherTextQ2}
                         onChange={(e) => setOtherTextQ2(e.target.value)}
@@ -178,25 +174,6 @@ export const QuestionnaireSection = ({
                 />
               ),
             )}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div>
-            <p className="text-lg font-bold text-[#222222]">
-              Q3. 다음 연애에서 가장 중요하게 생각하는 것은 무엇인가요?
-            </p>
-            <div className="text-sm font-light text-[#666666]">중복선택 가능</div>
-          </div>
-          <div className="flex flex-col items-start gap-2">
-            {q3Options.map((option) => (
-              <CheckboxOption
-                key={option}
-                label={option}
-                checked={!!checkedQ3[option]}
-                onToggle={() => toggleQ3(option)}
-              />
-            ))}
           </div>
         </div>
       </div>
