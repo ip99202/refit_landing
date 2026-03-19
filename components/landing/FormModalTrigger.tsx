@@ -77,7 +77,7 @@ export default function FormModalTrigger() {
             onClick={() => setOpen(true)}
             className="w-full rounded-2xl bg-[#ff7014] px-4 py-4 text-[clamp(22px,4.8cqw,60px)] font-bold leading-none text-white shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-[#ff7014] hover:ring-2 hover:ring-inset hover:ring-[#ff7014] active:bg-white active:text-[#ff7014] active:ring-2 active:ring-inset active:ring-[#ff7014] sm:py-6"
           >
-            연애 성사까지 혜택 보장받기
+            리핏 더 알아보기
           </button>
         </div>
       </div>
