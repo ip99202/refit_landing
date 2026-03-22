@@ -100,7 +100,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="relative mx-auto mt-12 flex w-full max-w-[564px] flex-col items-center gap-8 sm:mt-16 sm:gap-12">
+        <div className="relative mx-auto mt-12 flex w-full max-w-[564px] flex-col items-center sm:mt-16">
           <Image
             src={image1}
             alt="이별 이유 분석 섹션"
@@ -123,7 +123,7 @@ export default function LandingPage() {
           <div className="pointer-events-none absolute -left-40 -top-44 h-[520px] w-[520px] rounded-full bg-[linear-gradient(216deg,rgba(255,228,203,0.12)_0%,rgba(236,114,0,0.12)_100%)] blur-[45px]" />
 
           <div className="relative mx-auto w-full max-w-[564px] [container-type:inline-size]">
-            <p className="text-[clamp(12px,1.9cqw,32px)] font-light tracking-[-0.02em] text-[#d9d9d9]">
+            <p className="text-[16px] font-light tracking-[-0.02em] text-[#d9d9d9]">
               ※ 리핏은 6월 초에 오픈 될 예정입니다.
             </p>
 
@@ -145,7 +145,7 @@ export default function LandingPage() {
                     <div className="shrink-0 rounded-full bg-[#ff7014] px-3 py-1.5 text-[clamp(11px,1.9cqw,22px)] font-bold leading-none text-[#fff4ec] sm:px-5 sm:py-2">
                       {benefit.id}
                     </div>
-                    <p className="text-[clamp(13px,2.5cqw,32px)] font-medium leading-[1.25] tracking-[-0.02em] text-[#222222]">
+                    <p className="text-[18px] font-medium leading-[1.25] tracking-[-0.02em] text-[#222222]">
                       {benefit.text}
                     </p>
                   </div>

@@ -7,14 +7,14 @@ const benefits = [
 export const OfferDetailsSection = () => {
   return (
     <section className="w-full">
-      <h3 className="text-[clamp(24px,8.2vw,42px)] font-bold leading-[1.08] tracking-[-0.03em] text-[#222222]">
+      <h3 className="text-[28px] font-bold leading-[1.08] tracking-[-0.03em] text-[#222222]">
         전 연애 분석 받고
         <br />
         나랑 맞는 사람 찾자! <span className="text-[#ff6f13]">리핏</span>
       </h3>
-      <p className="mt-2 text-[14px] text-[#6a6a6a]">
+      {/* <p className="mt-2 text-[14px] text-[#6a6a6a]">
         질문은 두 문항이며, 30초 이내에 완료됩니다.
-      </p>
+      </p> */}
 
       <div className="mt-3 rounded-lg border border-[#ffd8b7] bg-white p-[clamp(10px,2.8vw,12px)]">
         <div className="space-y-[clamp(6px,1.8vw,8px)]">

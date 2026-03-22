@@ -164,7 +164,7 @@ export const UserInfoFormSection = ({
   return (
     <section className="w-full space-y-6">
       <div className="space-y-2">
-        <div className="text-[clamp(20px,5.8vw,32px)] font-bold leading-[1.25] tracking-[-0.02em] text-[#222222]">
+        <div className="text-[18px] font-bold leading-[1.25] tracking-[-0.02em] text-[#222222]">
           거의 완료됐어요!
           <br />
           마지막으로 정보를 입력해주세요
