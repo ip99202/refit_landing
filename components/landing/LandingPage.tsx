@@ -116,6 +116,7 @@ export default function LandingPage() {
             src={image3}
             alt="매칭 프로세스 섹션"
             className="h-auto w-full max-w-[564px]"
+            loading="eager"
           />
         </div>
 
