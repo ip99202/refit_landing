@@ -170,9 +170,9 @@ export const UserInfoFormSection = ({
           마지막으로 정보를 입력해주세요
         </div>
 
-        <p className="text-[14px] leading-[1.4] text-[#4a4a4a]">
+        {/* <p className="text-[14px] leading-[1.4] text-[#4a4a4a]">
           질문은 두 문항이며, 30초 이내에 완료됩니다.
-        </p>
+        </p> */}
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
