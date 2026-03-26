@@ -17,15 +17,20 @@ const CheckboxOption = ({
   label,
   checked,
   onToggle,
+  disabled = false,
 }: {
   label: string;
   checked: boolean;
   onToggle: () => void;
+  disabled?: boolean;
 }) => (
   <button
     type="button"
-    className="inline-flex cursor-pointer items-center gap-3 border-none bg-transparent p-0"
-    onClick={onToggle}
+    className={`inline-flex items-center gap-3 border-none bg-transparent p-0 ${
+      disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer"
+    }`}
+    onClick={disabled ? undefined : onToggle}
+    disabled={disabled}
   >
     <span className="flex w-6 flex-col items-center justify-center p-0.5">
       {checked ? (
@@ -51,10 +56,13 @@ const CheckboxOption = ({
       )}
     </span>
     <div
-      className={`w-fit whitespace-nowrap text-base leading-[21.4px] text-[color:var(--colorlabelnormal)] ${checked
-          ? "[font-family:'Freesentation-6SemiBold',Helvetica] font-semibold"
-          : "[font-family:'Freesentation-4Regular',Helvetica] font-normal"
-        }`}
+      className={`w-fit whitespace-nowrap text-base leading-[21.4px] ${
+        disabled
+          ? "text-[#aaaaaa] [font-family:'Freesentation-4Regular',Helvetica] font-normal"
+          : checked
+          ? "text-[color:var(--colorlabelnormal)] [font-family:'Freesentation-6SemiBold',Helvetica] font-semibold"
+          : "text-[color:var(--colorlabelnormal)] [font-family:'Freesentation-4Regular',Helvetica] font-normal"
+      }`}
     >
       {label}
     </div>
@@ -151,34 +159,42 @@ export const QuestionnaireSection = ({
             <div className="mt-1 text-sm font-light text-[#888888]">최대 3개 선택 가능</div>
           </div>
           <div className="flex flex-col items-start gap-2 pt-1">
-            {q2Options.map((option) =>
-              option === "기타" ? (
-                <div key={option} className="flex w-full flex-col items-start gap-2">
-                  <CheckboxOption
-                    label="기타"
-                    checked={!!checkedQ2[option]}
-                    onToggle={() => toggleQ2(option)}
-                  />
-                  <div className="w-full pl-8">
-                    <div className="flex flex-col rounded border border-solid border-[color:var(--colorlinenormal)] bg-[color:var(--colorbackgrounddefault)] p-[var(--element-spacing-6)]">
-                      <textarea
-                        className="h-[60px] w-full resize-none border-0 bg-transparent font-body2-regular text-[15px] leading-[1.4] text-[#222222] outline-none placeholder:text-[#a0a0a0]"
-                        placeholder="기타 사유를 입력해주세요"
-                        value={otherTextQ2}
-                        onChange={(e) => setOtherTextQ2(e.target.value)}
-                      />
+            {(() => {
+              const q2SelectedCount = Object.values(checkedQ2).filter(Boolean).length;
+              return q2Options.map((option) => {
+                const isChecked = !!checkedQ2[option];
+                const isDisabled = !isChecked && q2SelectedCount >= 3;
+                return option === "기타" ? (
+                  <div key={option} className="flex w-full flex-col items-start gap-2">
+                    <CheckboxOption
+                      label="기타"
+                      checked={isChecked}
+                      onToggle={() => toggleQ2(option)}
+                      disabled={isDisabled}
+                    />
+                    <div className="w-full pl-8">
+                      <div className={`flex flex-col rounded border border-solid border-[color:var(--colorlinenormal)] p-[var(--element-spacing-6)] ${isDisabled ? "bg-[#f5f5f5]" : "bg-[color:var(--colorbackgrounddefault)]"}`}>
+                        <textarea
+                          className={`h-[60px] w-full resize-none border-0 bg-transparent font-body2-regular text-[15px] leading-[1.4] outline-none placeholder:text-[#a0a0a0] ${isDisabled ? "cursor-not-allowed text-[#aaaaaa]" : "text-[#222222]"}`}
+                          placeholder="기타 사유를 입력해주세요"
+                          value={otherTextQ2}
+                          onChange={(e) => setOtherTextQ2(e.target.value)}
+                          disabled={isDisabled}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <CheckboxOption
-                  key={option}
-                  label={option}
-                  checked={!!checkedQ2[option]}
-                  onToggle={() => toggleQ2(option)}
-                />
-              ),
-            )}
+                ) : (
+                  <CheckboxOption
+                    key={option}
+                    label={option}
+                    checked={isChecked}
+                    onToggle={() => toggleQ2(option)}
+                    disabled={isDisabled}
+                  />
+                );
+              });
+            })()}
           </div>
         </div>
       </div>
