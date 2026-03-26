@@ -51,11 +51,10 @@ const CheckboxOption = ({
       )}
     </span>
     <div
-      className={`w-fit whitespace-nowrap text-base leading-[21.4px] text-[color:var(--colorlabelnormal)] ${
-        checked
+      className={`w-fit whitespace-nowrap text-base leading-[21.4px] text-[color:var(--colorlabelnormal)] ${checked
           ? "[font-family:'Freesentation-6SemiBold',Helvetica] font-semibold"
           : "[font-family:'Freesentation-4Regular',Helvetica] font-normal"
-      }`}
+        }`}
     >
       {label}
     </div>
@@ -95,7 +94,13 @@ export const QuestionnaireSection = ({
     setCheckedQ1((prev) => ({ ...prev, [option]: !prev[option] }));
   };
   const toggleQ2 = (option: string) => {
-    setCheckedQ2((prev) => ({ ...prev, [option]: !prev[option] }));
+    setCheckedQ2((prev) => {
+      const isChecked = !!prev[option];
+      const selectedCount = Object.values(prev).filter(Boolean).length;
+      // 이미 선택된 항목 해제는 허용, 새 항목 선택은 최대 3개까지만 허용
+      if (!isChecked && selectedCount >= 3) return prev;
+      return { ...prev, [option]: !isChecked };
+    });
   };
 
   return (
@@ -141,9 +146,9 @@ export const QuestionnaireSection = ({
         <div className="space-y-3">
           <div>
             <p className="text-[17px] font-bold text-[#222222] leading-[1.35]">
-              Q2. 소개팅어플에서 가장 중요하게 생각하는 부분이 무엇인가요?
+              Q2. 소개팅어플에서 가장 중요하게 생각하는 부분을 3가지만 골라주세요.
             </p>
-            <div className="mt-1 text-sm font-light text-[#888888]">중복선택 가능</div>
+            <div className="mt-1 text-sm font-light text-[#888888]">최대 3개 선택 가능</div>
           </div>
           <div className="flex flex-col items-start gap-2 pt-1">
             {q2Options.map((option) =>
