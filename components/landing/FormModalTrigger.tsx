@@ -7,12 +7,12 @@ import { UserInfoFormSection } from "./UserInfoFormSection";
 
 const FormModal = ({ onClose, children }: { onClose: () => void; children: ReactNode }) => {
   return (
-    <div className="fixed inset-0 z-[70] bg-black/55 p-2 sm:p-5" onClick={onClose}>
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/55 p-2 sm:p-5" onClick={onClose}>
       <div
-        className="mx-auto h-full w-full max-w-[430px] overflow-hidden rounded-2xl bg-[#fff8ee] shadow-2xl"
+        className="mx-auto w-full max-w-[430px] overflow-hidden rounded-2xl bg-[#fff8ee] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="h-full overflow-y-auto px-4 pb-6 pt-5">
+        <div className="max-h-[90dvh] overflow-y-auto px-4 pb-6 pt-5">
           <div className="mb-3 flex justify-end">
             <button
               type="button"
