@@ -47,14 +47,14 @@ export const UserInfoFormSection = ({
     e.preventDefault();
     setMessage(null);
 
-    if (!Object.values(checkedQ1).some(Boolean)) {
-      setMessage({ type: "error", text: "Q1 문항을 1개 이상 선택해주세요." });
-      return;
-    }
-    if (!Object.values(checkedQ2).some(Boolean)) {
-      setMessage({ type: "error", text: "Q2 문항을 1개 이상 선택해주세요." });
-      return;
-    }
+    // if (!Object.values(checkedQ1).some(Boolean)) {
+    //   setMessage({ type: "error", text: "Q1 문항을 1개 이상 선택해주세요." });
+    //   return;
+    // }
+    // if (!Object.values(checkedQ2).some(Boolean)) {
+    //   setMessage({ type: "error", text: "Q2 문항을 1개 이상 선택해주세요." });
+    //   return;
+    // }
 
     const q1CodeOrder = [
       { key: "연락/소통 문제", code: "a1" },
@@ -81,14 +81,14 @@ export const UserInfoFormSection = ({
     const etc1 = checkedQ1["기타"] && otherTextQ1.trim() ? otherTextQ1.trim() : "";
     const etc2 = checkedQ2["기타"] && otherTextQ2.trim() ? otherTextQ2.trim() : "";
 
-    if (checkedQ1["기타"] && !otherTextQ1.trim()) {
-      setMessage({ type: "error", text: "Q1의 기타 사유를 입력해주세요." });
-      return;
-    }
-    if (checkedQ2["기타"] && !otherTextQ2.trim()) {
-      setMessage({ type: "error", text: "Q2의 기타 사유를 입력해주세요." });
-      return;
-    }
+    // if (checkedQ1["기타"] && !otherTextQ1.trim()) {
+    //   setMessage({ type: "error", text: "Q1의 기타 사유를 입력해주세요." });
+    //   return;
+    // }
+    // if (checkedQ2["기타"] && !otherTextQ2.trim()) {
+    //   setMessage({ type: "error", text: "Q2의 기타 사유를 입력해주세요." });
+    //   return;
+    // }
 
     if (!name.trim()) {
       setMessage({ type: "error", text: "이름을 입력해주세요." });
@@ -163,16 +163,13 @@ export const UserInfoFormSection = ({
 
   return (
     <section className="w-full space-y-6">
-      <div className="space-y-2">
+      <div className="space-y-1">
         <div className="text-[18px] font-bold leading-[1.25] tracking-[-0.02em] text-[#222222]">
-          거의 완료됐어요!
-          <br />
-          마지막으로 정보를 입력해주세요
+          정보를 입력해주세요
         </div>
-
-        {/* <p className="text-[14px] leading-[1.4] text-[#4a4a4a]">
-          질문은 두 문항이며, 30초 이내에 완료됩니다.
-        </p> */}
+        <p className="text-[14px] leading-[1.4] text-[#6a6a6a]">
+          입력 정보는 서비스 오픈 안내 후 삭제됩니다.
+        </p>
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>

@@ -84,12 +84,6 @@ export async function POST(request: Request) {
     if (!["남", "여"].includes(body.gender)) {
       return NextResponse.json({ error: "성별을 선택해주세요." }, { status: 400 });
     }
-    if (!body.q1?.trim()) {
-      return NextResponse.json({ error: "Q1 문항을 선택해주세요." }, { status: 400 });
-    }
-    if (!body.q2?.trim()) {
-      return NextResponse.json({ error: "Q2 문항을 1개 이상 선택해주세요." }, { status: 400 });
-    }
 
     const supabase = createClient();
     const { error } = await supabase.from("user_info_landing").insert({

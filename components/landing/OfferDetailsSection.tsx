@@ -10,10 +10,10 @@ export const OfferDetailsSection = () => {
       <h3 className="text-[28px] font-bold leading-[1.08] tracking-[-0.03em] text-[#222222]">
         전 연애 분석 받고
         <br />
-        나랑 맞는 사람 찾자! <span className="text-[#ff6f13]">리핏</span>
+        나랑 잘 맞는 사람 찾자! <span className="text-[#ff6f13]">&apos;리핏&apos;</span>
       </h3>
       <p className="mt-2 text-[14px] text-[#6a6a6a]">
-        질문은 두 문항이며, 30초 이내에 완료됩니다.
+        질문은 세 문항으로 1분이내에 완료됩니다.
       </p>
 
       <div className="mt-3 rounded-lg border border-[#ffd8b7] bg-white p-[clamp(10px,2.8vw,12px)]">
@@ -33,7 +33,7 @@ export const OfferDetailsSection = () => {
 
       <div className="mt-3 space-y-1 text-[12px] font-medium text-[#606060]">
         <p>※ 정식 서비스는 6월 10일 오픈 예정입니다.</p>
-        <p>※ 문자 및 카톡으로 안내 결과를 보내드립니다.</p>
+        <p>오픈 시 문자로 이용 안내 링크를 보내드립니다.</p>
       </div>
     </section>
   );

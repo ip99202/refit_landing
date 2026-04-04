@@ -72,10 +72,16 @@ export default function FormModalTrigger() {
     <>
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex flex-col items-center pb-[calc(env(safe-area-inset-bottom)+12px)]">
         <div className="pointer-events-auto w-full max-w-[564px] px-5 sm:px-8 [container-type:inline-size]">
+          <div className="relative mb-3 flex justify-center">
+            <div className="rounded-full bg-white px-5 py-2 text-[clamp(13px,2.8cqw,32px)] font-medium leading-none text-[#111111] shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
+              오늘 신청하면 <strong className="font-bold">10만원 상당의 프로모션</strong> 지급!
+            </div>
+            <div className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 border-l-[7px] border-r-[7px] border-t-[8px] border-l-transparent border-r-transparent border-t-white" />
+          </div>
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="w-full rounded-2xl bg-[#ff7014] px-4 py-4 text-[clamp(22px,4.8cqw,60px)] font-bold leading-none text-white shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-[#ff7014] hover:ring-2 hover:ring-inset hover:ring-[#ff7014] active:bg-white active:text-[#ff7014] active:ring-2 active:ring-inset active:ring-[#ff7014] sm:py-6"
+            className="w-full rounded-2xl bg-[#111111] px-4 py-4 text-[clamp(22px,4.8cqw,60px)] font-bold leading-none text-white shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-[#333333] active:bg-[#333333] sm:py-6"
           >
             리핏 더 알아보기
           </button>
@@ -85,7 +91,7 @@ export default function FormModalTrigger() {
       {open ? (
         <FormModal onClose={() => setOpen(false)}>
           <OfferDetailsSection />
-          <QuestionnaireSection
+          {/* <QuestionnaireSection
             checkedQ1={checkedQ1}
             setCheckedQ1={setCheckedQ1}
             otherTextQ1={otherTextQ1}
@@ -94,7 +100,7 @@ export default function FormModalTrigger() {
             setCheckedQ2={setCheckedQ2}
             otherTextQ2={otherTextQ2}
             setOtherTextQ2={setOtherTextQ2}
-          />
+          /> */}
           <UserInfoFormSection
             checkedQ1={checkedQ1}
             checkedQ2={checkedQ2}
