@@ -70,7 +70,7 @@ export default function FormModalTrigger() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex flex-col items-center pb-[calc(env(safe-area-inset-bottom)+12px)]">
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex flex-col items-center pb-[calc(env(safe-area-inset-bottom)+20px)]">
         <div className="pointer-events-auto w-full max-w-[564px] px-5 sm:px-8 [container-type:inline-size]">
           <div className="relative mb-3 flex justify-center">
             <div className="rounded-full border border-[#ff7014] bg-white px-5 py-2 text-[clamp(13px,2.8cqw,32px)] font-medium leading-none text-[#ff7014] shadow-[0_4px_12px_rgba(0,0,0,0.08)]">

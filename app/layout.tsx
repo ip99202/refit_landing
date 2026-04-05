@@ -28,6 +28,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        {/* Paperlogy Font */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css"
+        />
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="beforeInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

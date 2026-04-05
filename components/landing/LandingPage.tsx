@@ -66,7 +66,7 @@ export default function LandingPage() {
           </div>
 
           <h1
-            className="text-[clamp(48px,12cqw,108px)] font-bold leading-[1.1] tracking-[-0.03em] text-[#222222]"
+            className="text-[clamp(48px,12cqw,108px)] font-semibold leading-[1.1] tracking-[-0.03em] text-[#222222]"
             style={{
               WebkitTextStroke: "clamp(1px,0.3cqw,3px) #fff",
               paintOrder: "stroke fill",
