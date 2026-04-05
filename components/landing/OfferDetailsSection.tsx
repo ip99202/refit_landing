@@ -12,9 +12,6 @@ export const OfferDetailsSection = () => {
         <br />
         나랑 잘 맞는 사람 찾자! <span className="text-[#ff6f13]">&apos;리핏&apos;</span>
       </h3>
-      <p className="mt-2 text-[14px] text-[#6a6a6a]">
-        질문은 세 문항으로 1분이내에 완료됩니다.
-      </p>
 
       <div className="mt-3 rounded-lg border border-[#ffd8b7] bg-white p-[clamp(10px,2.8vw,12px)]">
         <div className="space-y-[clamp(6px,1.8vw,8px)]">
