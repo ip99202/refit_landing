@@ -6,6 +6,8 @@ import image1 from "./assets/image1.png";
 import image2 from "./assets/image2.png";
 import image3 from "./assets/image3.png";
 import image4 from "./assets/image4.png";
+import image5 from "./assets/image5.png";
+import footer from "./assets/Footer.png";
 import FormModalTrigger from "./FormModalTrigger";
 
 
@@ -108,7 +110,17 @@ export default function LandingPage() {
           alt="리핏 서비스 소개"
           className="h-auto w-full max-w-[564px]"
         />
-        <div className="w-full bg-[#ff7014] pb-[120px] sm:pb-[140px]" />
+        <Image
+          src={image5}
+          alt="사전신청 프로모션 섹션"
+          className="h-auto w-full max-w-[564px]"
+        />
+        <Image
+          src={footer}
+          alt="푸터"
+          className="h-auto w-full max-w-[564px]"
+        />
+        <div className="w-full bg-[#1A1C1F] pb-[120px] sm:pb-[140px]" />
       </section>
       </main>
 

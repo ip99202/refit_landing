@@ -82,7 +82,7 @@ export default function FormModalTrigger() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="w-full rounded-2xl bg-[#111111] px-4 py-4 text-[clamp(22px,4.8cqw,60px)] font-bold leading-none text-white shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-[#333333] active:bg-[#333333] sm:py-6"
+            className="w-full rounded-2xl bg-[#ff7014] px-4 py-4 text-[clamp(22px,4.8cqw,60px)] font-bold leading-none text-white shadow-[0_12px_30px_rgba(255,112,20,0.4)] transition-all duration-200 hover:bg-[#e66010] active:bg-[#e66010] sm:py-6"
           >
             리핏 더 알아보기
           </button>
