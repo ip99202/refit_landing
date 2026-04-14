@@ -56,12 +56,12 @@ const CheckboxOption = ({
       )}
     </span>
     <div
-      className={`w-fit whitespace-nowrap text-base leading-[21.4px] ${
+      className={`w-fit whitespace-nowrap font-['Freesentation'] text-base leading-[21.4px] ${
         disabled
-          ? "text-[#aaaaaa] [font-family:'Freesentation-4Regular',Helvetica] font-normal"
+          ? "font-normal text-[#aaaaaa]"
           : checked
-          ? "text-[color:var(--colorlabelnormal)] [font-family:'Freesentation-6SemiBold',Helvetica] font-semibold"
-          : "text-[color:var(--colorlabelnormal)] [font-family:'Freesentation-4Regular',Helvetica] font-normal"
+          ? "font-semibold text-[#222222]"
+          : "font-normal text-[#222222]"
       }`}
     >
       {label}

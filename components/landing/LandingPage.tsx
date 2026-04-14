@@ -45,11 +45,11 @@ export default function LandingPage() {
       {/* Fixed Floating Badge - placed in a full-screen fixed container to manage max width and container-type */}
       <div className="pointer-events-none fixed inset-0 z-50 mx-auto w-full max-w-[564px] [container-type:inline-size]">
         <div
-          className={`pointer-events-auto absolute left-1/2 top-4 inline-flex -translate-x-1/2 whitespace-nowrap rounded-full bg-[#e8e4e0] px-5 py-2 text-[clamp(13px,2cqw,36px)] font-semibold leading-none text-[#444444] shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-300 sm:top-8 sm:px-8 sm:py-3 ${
+          className={`pointer-events-auto absolute left-1/2 top-4 inline-flex -translate-x-1/2 whitespace-nowrap rounded-full bg-[#e8e4e0] px-6 py-3 text-[clamp(15px,3cqw,42px)] font-semibold leading-none text-[#444444] shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-300 sm:top-8 sm:px-10 sm:py-4 ${
             isVisible ? "translate-y-0 opacity-100" : "-translate-y-[150%] opacity-0"
           }`}
         >
-          진지한 연애를 생각하는 {mounted ? viewerCount : 18}명이 보고 있어요 👀
+          현재 {mounted ? viewerCount : 18}명이 보고있어요 👀
         </div>
       </div>
 
@@ -61,27 +61,30 @@ export default function LandingPage() {
         <div className="relative mx-auto flex w-full max-w-[564px] flex-col items-center text-center [container-type:inline-size]">
           {/* Invisible placeholder to maintain layout space */}
           <div
-            className="pointer-events-none mb-8 inline-flex whitespace-nowrap rounded-full px-5 py-2 text-[clamp(13px,2cqw,36px)] font-semibold leading-none opacity-0 sm:mb-12 sm:px-8 sm:py-3"
+            className="pointer-events-none mb-8 inline-flex whitespace-nowrap rounded-full px-6 py-3 text-[clamp(15px,3cqw,42px)] font-semibold leading-none opacity-0 sm:mb-12 sm:px-10 sm:py-4"
             aria-hidden="true"
           >
-            진지한 연애를 생각하는 {mounted ? viewerCount : 18}명이 보고 있어요 👀
+            현재 {mounted ? viewerCount : 18}명이 보고있어요 👀
           </div>
 
           <h1
-            className="text-[clamp(48px,12cqw,108px)] font-semibold leading-[1.1] tracking-[-0.03em] text-[#222222]"
-            style={{
-              WebkitTextStroke: "clamp(1px,0.3cqw,3px) #fff",
-              paintOrder: "stroke fill",
-            }}
+            className="font-['Paperlogy'] text-[clamp(54px,14cqw,120px)] font-black leading-[1.1] tracking-[-0.02em] text-[#222222]"
           >
-            <span className="block whitespace-nowrap">여러 명 말고,</span>
-            <span className="block whitespace-nowrap font-black text-[#ff6f13]">딱 한 사람.</span>
-            <span className="block whitespace-nowrap">제대로된 연애 시작</span>
+            <span className="block whitespace-nowrap">
+              <span className="text-[#ff6f13]">똥차</span> 같은 연애
+            </span>
+            <span className="block whitespace-nowrap">
+              이제 <span className="text-[#ff6f13]">그만!</span>🖐
+            </span>
           </h1>
 
-          <p className="mt-6 text-[clamp(17px,4.6cqw,42px)] font-medium leading-[1.5] text-[#222222] sm:mt-10">
-            <span className="block"><strong>전 연애를 기반</strong>으로 한{" "}<strong className="font-extrabold">AI 패턴 분석 매칭</strong>으로</span>
-            <span className="block">이제 나와 맞는 사람을 만나세요!</span>
+          <p className="mt-6 text-[clamp(19px,5.2cqw,48px)] font-medium leading-[1.5] text-[#222222] sm:mt-10">
+            <span className="block">전 연애는 그만 떠올리고</span>
+            <span className="block">이제 <strong>나와 맞는 사람</strong>을 만나세요!</span>
+          </p>
+
+          <p className="mt-6 text-[clamp(18px,4.8cqw,44px)] font-semibold leading-[1.5] text-[#222222] sm:mt-8">
+            &ldquo;전 연애 기반 소개팅 서비스 <span className="text-[#ff6f13]">리핏(re:fit)</span>&rdquo;
           </p>
         </div>
 

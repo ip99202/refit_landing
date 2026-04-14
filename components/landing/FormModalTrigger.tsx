@@ -9,7 +9,7 @@ const FormModal = ({ onClose, children }: { onClose: () => void; children: React
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/55 p-2 sm:p-5" onClick={onClose}>
       <div
-        className="mx-auto w-full max-w-[430px] overflow-hidden rounded-2xl bg-[#fff8ee] shadow-2xl"
+        className="mx-auto w-full max-w-[430px] overflow-hidden rounded-2xl bg-[#fff8ee] font-['Freesentation'] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="max-h-[90dvh] overflow-y-auto px-4 pb-6 pt-5">
@@ -92,7 +92,7 @@ export default function FormModalTrigger() {
       {open ? (
         <FormModal onClose={() => setOpen(false)}>
           <OfferDetailsSection />
-          {/* <QuestionnaireSection
+          <QuestionnaireSection
             checkedQ1={checkedQ1}
             setCheckedQ1={setCheckedQ1}
             otherTextQ1={otherTextQ1}
@@ -101,7 +101,7 @@ export default function FormModalTrigger() {
             setCheckedQ2={setCheckedQ2}
             otherTextQ2={otherTextQ2}
             setOtherTextQ2={setOtherTextQ2}
-          /> */}
+          />
           <UserInfoFormSection
             checkedQ1={checkedQ1}
             checkedQ2={checkedQ2}
