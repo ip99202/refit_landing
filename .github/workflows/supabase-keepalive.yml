@@ -28,3 +28,21 @@ jobs:
           echo "Response Body:"
           echo "$BODY" | python3 -m json.tool || echo "$BODY"
           [ "$HTTP_CODE" != "000" ] || exit 1
+
+          echo "---"
+          echo "Inserting into alive table..."
+          NOW_ID=$(date +%s)
+          INSERT_RESPONSE=$(curl -s -w "\n%{http_code}" \
+            --connect-timeout 10 \
+            -X POST "${SUPABASE_URL}/rest/v1/alive" \
+            -H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=representation" \
+            -d "{\"id\": ${NOW_ID}}")
+          INSERT_CODE=$(echo "$INSERT_RESPONSE" | tail -n1)
+          INSERT_BODY=$(echo "$INSERT_RESPONSE" | sed '$d')
+          echo "Insert HTTP Status: ${INSERT_CODE}"
+          echo "Insert Response Body:"
+          echo "$INSERT_BODY" | python3 -m json.tool || echo "$INSERT_BODY"
+          [ "$INSERT_CODE" != "000" ] || exit 1
