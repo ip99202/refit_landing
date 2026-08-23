@@ -30,11 +30,6 @@ export const OfferDetailsSection = () => {
           ))}
         </div>
       </div>
-
-      <div className="mt-3 space-y-1 text-[12px] font-medium text-[#606060]">
-        <p>※ 정식 서비스는 6월 10일 오픈 예정입니다.</p>
-        <p>오픈 시 문자로 이용 안내 링크를 보내드립니다.</p>
-      </div>
     </section>
   );
 };
