@@ -30,8 +30,18 @@ const FormModal = ({ onClose, children }: { onClose: () => void; children: React
   );
 };
 
-export default function FormModalTrigger() {
-  const [open, setOpen] = useState(false);
+interface FormModalTriggerProps {
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+}
+
+export default function FormModalTrigger({
+  open: controlledOpen,
+  setOpen: setControlledOpen,
+}: FormModalTriggerProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = setControlledOpen || setInternalOpen;
   const [checkedQ1, setCheckedQ1] = useState<Record<string, boolean>>({
     "연락/소통 문제": false,
     "상대의 무관심": false,
@@ -66,7 +76,7 @@ export default function FormModalTrigger() {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [open]);
+  }, [open, setOpen]);
 
   return (
     <>

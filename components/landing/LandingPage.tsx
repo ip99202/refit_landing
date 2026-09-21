@@ -16,8 +16,10 @@ export default function LandingPage() {
   const [viewerCount, setViewerCount] = useState(18);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     setViewerCount(Math.floor(Math.random() * 6) + 15);
   }, []);
@@ -113,11 +115,34 @@ export default function LandingPage() {
           alt="리핏 서비스 소개"
           className="h-auto w-full max-w-[564px]"
         />
-        <Image
-          src={image5}
-          alt="사전신청 프로모션 섹션"
-          className="h-auto w-full max-w-[564px]"
-        />
+        <div className="relative w-full max-w-[564px] bg-[#2E2926] [container-type:inline-size]">
+          <Image
+            src={image5}
+            alt="사전신청 프로모션 섹션"
+            className="h-auto w-full max-w-[564px]"
+          />
+          <div className="w-full px-[7.6%] pb-10 sm:pb-14">
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-[#ff7014] py-3.5 text-[clamp(19px,4.5cqw,48px)] font-bold leading-none text-white shadow-[0_8px_24px_rgba(255,112,20,0.35)] transition-all duration-200 hover:bg-[#e66010] active:bg-[#e66010] sm:py-5"
+            >
+              <span>30초만에 더 알아보기</span>
+              <svg
+                className="h-[0.9em] w-[0.9em] shrink-0 translate-y-[-0.5px]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
         <Image
           src={footer}
           alt="푸터"
@@ -127,7 +152,7 @@ export default function LandingPage() {
       </section>
       </main>
 
-      <FormModalTrigger />
+      <FormModalTrigger open={isModalOpen} setOpen={setIsModalOpen} />
     </>
   );
 }
